@@ -341,6 +341,21 @@ body.is-open .skip{display:none}
 .petal{position:fixed;top:-18px;z-index:6;pointer-events:none;color:#e7b7bd;animation:drift linear forwards}
 @keyframes drift{to{transform:translate3d(var(--x),105vh,0) rotate(var(--r));opacity:.75}}
 
+@media (max-width:600px){
+  .pair{grid-template-columns:1fr;gap:20px}
+  .portrait{
+    width:min(350px,100%);
+    margin:0 auto;
+    aspect-ratio:1/1;
+    height:auto;
+  }
+  .portrait img{width:100%;height:100%;object-fit:cover}
+  .portrait .groom{object-position:50% 50%}
+  .portrait .bride{
+    object-position:50% 48%;
+    filter:brightness(1.14) contrast(1.04) saturate(1.06);
+  }
+}
 @media (max-width:380px){
   .portrait{height:auto}
   .card{padding:26px 14px 22px}
