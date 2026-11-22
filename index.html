@@ -309,8 +309,19 @@ img{max-width:100%;display:block}
 .home p{margin:2px 0 0;font-style:italic;font-size:18px}
 
 .closing h2{font-size:clamp(30px,7vw,42px)}
+.closing-mark{
+  width:66px;height:66px;margin:0 auto 14px;border-radius:50%;
+  display:grid;place-items:center;
+  border:1px solid rgba(184,146,74,.8);
+  outline:1px solid rgba(184,146,74,.35);outline-offset:4px;
+  background:radial-gradient(circle at 35% 28%,#fffdf8,#f0dfc7 68%,#dfc18a);
+  color:#80505a;font-size:25px;line-height:1;letter-spacing:-.06em;
+  box-shadow:0 8px 18px rgba(92,52,62,.1),inset 0 0 0 4px rgba(255,255,255,.45);
+}
+.closing-mark em{font-size:.7em;font-style:italic;padding:0 1px}
 .names{margin:12px 0 0;font-size:28px;color:var(--rose)}
 .date-line{margin:4px 0 0;font-style:italic;font-size:20px}
+.closing .closing-note{max-width:23em;margin:14px auto 0;font-size:18px;line-height:1.45;color:var(--muted)}
 
 .rise{opacity:0;transform:translateY(14px);transition:opacity .7s ease, transform .8s cubic-bezier(.16,.84,.28,1)}
 .sheet.in .rise{opacity:1;transform:none}
@@ -350,7 +361,7 @@ img{max-width:100%;display:block}
   .portrait .groom{object-position:50% 50%}
   .portrait .bride{
     object-position:50% 48%;
-    filter:brightness(1.14) contrast(1.04) saturate(1.06);
+    filter:brightness(1.06) contrast(1.03) saturate(1.02);
   }
 }
 @media (max-width:380px){
@@ -545,10 +556,12 @@ img{max-width:100%;display:block}
     <svg class="flora bl"><use href="#spray" xlink:href="#spray"/></svg>
     <svg class="flora br"><use href="#spray" xlink:href="#spray"/></svg>
     <article class="card closing">
+      <div class="closing-mark rise" aria-label="P and P monogram">P<em>&amp;</em>P</div>
       <p class="script rise" style="font-size:34px;color:var(--rose);margin:0">With love</p>
       <h2 class="rise d2">We look forward to celebrating this beautiful beginning with you.</h2>
       <p class="names rise d2">Puneet &amp; Priya</p>
-      <p class="date-line rise d3">4 December 2026</p>
+      <p class="date-line rise d3">Friday · 4 December 2026</p>
+      <p class="closing-note rise d3">Your presence, warm wishes and blessings will mean the world to our families.</p>
       <p class="hindi rise d3" lang="hi">आपके आशीर्वाद का इंतज़ार रहेगा।</p>
       <div class="actions rise d3">
         <a class="btn" id="rsvpYes" target="_blank" rel="noopener" href="https://wa.me/919005826302?text=Namaste%2C%20we%20will%20be%20there%20for%20Puneet%20and%20Priya%27s%20engagement%20on%20Friday%2C%204%20December%202026.%20Number%20of%20guests%3A%20">We’ll be there</a>
