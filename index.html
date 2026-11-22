@@ -66,18 +66,6 @@ img{max-width:100%;display:block}
 .music i:nth-child(3){animation-delay:.3s}
 @keyframes bar{50%{transform:scaleY(.45)}}
 
-.skip{
-  position:fixed;z-index:50;
-  top:calc(10px + env(safe-area-inset-top));
-  left:8px;
-  min-height:44px;
-  padding:12px 8px;
-  border:0;background:none;color:var(--muted);
-  font:500 11px/1 Outfit,"Segoe UI",Arial,sans-serif;
-  letter-spacing:.18em;text-transform:uppercase;
-}
-body.is-open .skip{display:none}
-
 #intro{
   min-height:100svh;
   display:grid;place-items:center;
@@ -247,9 +235,18 @@ body.is-open .skip{display:none}
 .rule:before,.rule:after{content:"";width:42px;height:1px;background:currentColor}
 .rule i{width:5px;height:5px;border:1px solid currentColor;transform:rotate(45deg)}
 .hindi{margin:12px 0 0;font-size:17px;line-height:1.6;color:var(--rose)}
-.when{margin:8px 0 0;font-size:clamp(32px,8vw,46px);line-height:1.02}
-.when span{display:block;font-size:.42em;letter-spacing:.16em;text-transform:uppercase;font-family:Outfit,"Segoe UI",Arial,sans-serif;font-weight:500;color:var(--muted);margin-bottom:6px}
-.sub{margin:8px 0 0;font-style:italic;font-size:22px;color:var(--rose)}
+.date-reveal{position:relative;margin:12px auto 0;padding:20px 12px 16px;max-width:320px;border-top:1px solid rgba(184,146,74,.55);border-bottom:1px solid rgba(184,146,74,.55);}
+.date-reveal:before,.date-reveal:after{content:"✦";position:absolute;top:50%;transform:translateY(-50%);color:var(--gold);font-size:12px}
+.date-reveal:before{left:0}.date-reveal:after{right:0}
+.date-reveal .day-number{display:block;font-size:clamp(76px,20vw,104px);line-height:.82;color:var(--rose);font-weight:500;letter-spacing:-.05em;text-shadow:0 5px 18px rgba(141,77,91,.12)}
+.date-reveal .month{display:block;margin-top:12px;font:500 13px/1 Outfit,"Segoe UI",Arial,sans-serif;letter-spacing:.34em;text-transform:uppercase;color:var(--gold)}
+.date-reveal .weekday{display:block;margin-top:9px;font:500 10px/1 Outfit,"Segoe UI",Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.sheet.in .date-reveal .day-number{animation:date-arrive 1s cubic-bezier(.16,.84,.28,1) both}
+.sheet.in .date-reveal .month{animation:date-fade .8s ease .35s both}
+.sheet.in .date-reveal .weekday{animation:date-fade .8s ease .55s both}
+@keyframes date-arrive{from{opacity:0;transform:translateY(18px) scale(.82);filter:blur(5px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes date-fade{from{opacity:0;letter-spacing:.5em}to{opacity:1;letter-spacing:.22em}}
+.sub{margin:12px 0 0;font-style:italic;font-size:22px;color:var(--rose)}
 .place{margin:8px 0 0;font-size:20px;line-height:1.45}
 .place b{font-weight:500}
 
@@ -412,8 +409,6 @@ body.is-open .skip{display:none}
 </button>
 <audio id="musicAudio" preload="none" playsinline src="assets/invitation.mp3"></audio>
 
-<button class="skip" id="skip" type="button">Skip intro</button>
-
 <div id="intro">
   <svg class="flora tl"><use href="#spray" xlink:href="#spray"/></svg>
   <svg class="flora br"><use href="#spray" xlink:href="#spray"/></svg>
@@ -456,8 +451,12 @@ body.is-open .skip{display:none}
   <section class="sheet" id="day">
     <svg class="flora tr"><use href="#spray" xlink:href="#spray"/></svg>
     <article class="card">
-      <p class="eyebrow rise">Our special day</p>
-      <p class="when rise d2"><span>Friday</span>4 December 2026</p>
+      <p class="eyebrow rise">A day to remember</p>
+      <div class="date-reveal rise d2" aria-label="Friday, 4 December 2026">
+        <span class="day-number">04</span>
+        <span class="month">December</span>
+        <span class="weekday">Friday · 2026</span>
+      </div>
       <p class="sub rise d2">5:00 PM onwards</p>
       <p class="hindi rise d2" lang="hi">शुक्रवार · ४ दिसम्बर २०२६</p>
       <p class="place rise d3"><b>The Palace</b><br>Juhi Kalan, Kanpur</p>
@@ -500,6 +499,8 @@ body.is-open .skip{display:none}
           <p class="role">Bride-to-be</p>
         </article>
       </div>
+      <div class="rule rise d3" aria-hidden="true"><i></i></div>
+      <p class="script rise d3" style="font-size:30px;color:var(--rose);margin:8px 0 0">Two hearts, one beautiful beginning</p>
       <p class="lede rise d3">Your presence and blessings will make this evening complete.</p>
     </article>
   </section>
@@ -593,9 +594,10 @@ body.is-open .skip{display:none}
     }
   }
 
-  function petals() {
+  function petals(amount) {
     if (reduce) return;
-    for (var i = 0; i < 12; i++) {
+    amount = amount || 12;
+    for (var i = 0; i < amount; i++) {
       var petal = document.createElement('span');
       petal.className = 'petal';
       petal.textContent = i % 3 === 0 ? '❀' : '✦';
@@ -652,11 +654,6 @@ body.is-open .skip{display:none}
   }
 
   envelope.addEventListener('click', begin);
-  document.getElementById('skip').addEventListener('click', function () {
-    started = true;
-    reveal();
-  });
-
   musicBtn.addEventListener('click', function () {
     if (!audio.paused && audio.currentTime > 0) {
       audio.pause();
@@ -678,11 +675,16 @@ body.is-open .skip{display:none}
       else dot.removeAttribute('aria-current');
     });
   }
+  var datePetalsShown = false;
   if ('IntersectionObserver' in window) {
     var watch = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('in');
+          if (entry.target.id === 'day' && !datePetalsShown) {
+            datePetalsShown = true;
+            petals(7);
+          }
           if (entry.intersectionRatio > 0.5) mark(entry.target.id);
         }
       });
@@ -735,12 +737,6 @@ body.is-open .skip{display:none}
   var timer = setInterval(tick, 1000);
   tick();
 
-  try {
-    if (new URLSearchParams(location.search).get('skip') === '1') {
-      started = true;
-      reveal();
-    }
-  } catch (err) {}
 })();
 </script>
 <noscript>
