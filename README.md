@@ -11,3 +11,6 @@ After the first deployment, the public site will be available at:
 https://tech4uonline.github.io/puneet-priya-engagement/
 
 The invitation uses relative paths for `assets/`, so the HTML, photographs, and music must remain in their current locations.
+
+
+GitHub Pages is configured to deploy from the GitHub Actions workflow.
