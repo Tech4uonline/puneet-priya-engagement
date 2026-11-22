@@ -240,23 +240,19 @@ img{max-width:100%;display:block}
   position:relative;isolation:isolate;overflow:hidden;
   padding:23px 22px 22px;min-height:282px;
   background:
-    repeating-linear-gradient(96deg,rgba(255,255,255,.17) 0 1px,transparent 1px 5px),
-    repeating-linear-gradient(0deg,rgba(133,92,61,.035) 0 1px,transparent 1px 4px),
-    radial-gradient(ellipse at 18% 16%,rgba(255,255,255,.95),transparent 42%),
-    linear-gradient(110deg,#f5e8d3 0%,#fff9ed 22%,#f1e1c9 50%,#fff9ed 78%,#ead7bb 100%);
+    repeating-linear-gradient(92deg,rgba(255,255,255,.18) 0 1px,transparent 1px 7px),
+    linear-gradient(90deg,#ead8bb 0%,#fffaf0 12%,#f5e8d3 48%,#fffaf0 88%,#e9d5b6 100%);
   border:1px solid #b68d4d;
   outline:1px solid rgba(255,255,255,.8);outline-offset:-5px;
   box-shadow:inset 0 0 0 4px rgba(255,255,255,.34),inset 0 0 24px rgba(139,94,54,.12);
-  clip-path:inset(0 0 94% 0 round 3px);
+  clip-path:inset(0 0 98% 0 round 2px);
 }
 .royal-cloth:before{
-  content:"";position:absolute;inset:10px;z-index:-1;pointer-events:none;
-  border:1px solid rgba(166,125,61,.72);
-  background:
-    radial-gradient(circle at 0 0,transparent 0 7px,#b58a4a 7.5px 8.5px,transparent 9px) 0 0/22px 22px,
-    radial-gradient(circle at 100% 100%,transparent 0 7px,#b58a4a 7.5px 8.5px,transparent 9px) 0 0/22px 22px;
+  content:"";position:absolute;inset:10px;z-index:0;pointer-events:none;
+  border:1px solid rgba(166,125,61,.55);
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.32);
 }
-.royal-cloth:after{content:"✦   ❧   ✦";display:block;margin-top:13px;color:#a77d3e;font-size:13px;letter-spacing:.32em}
+.royal-cloth:after{content:"✦     ❧     ✦";position:relative;z-index:1;display:block;margin-top:13px;color:#a77d3e;font-size:13px;letter-spacing:.32em}
 .royal-rod{
   position:relative;z-index:2;height:13px;width:calc(100% + 16px);margin-left:-8px;
   border-radius:9px;
@@ -264,7 +260,7 @@ img{max-width:100%;display:block}
   box-shadow:0 3px 5px rgba(91,58,30,.2),inset 0 1px 2px rgba(255,255,255,.8);
 }
 .royal-rod.top{margin-bottom:-2px}
-.royal-rod.bottom{margin-top:-2px}
+.royal-rod.bottom{margin-top:-2px;transform:translateY(-294px)}
 .royal-rod:before,.royal-rod:after{content:"";position:absolute;top:50%;width:19px;height:19px;border-radius:50%;transform:translateY(-50%);background:radial-gradient(circle at 35% 30%,#f7e4b4,#b4863e 65%,#76512c);border:1px solid #f4dfac;box-shadow:0 2px 4px rgba(70,45,25,.18)}
 .royal-rod:before{left:-5px}.royal-rod:after{right:-5px}
 .royal-kicker{margin:0;font:500 9px/1.5 Outfit,"Segoe UI",Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#8e6b42}
@@ -278,10 +274,13 @@ img{max-width:100%;display:block}
 .royal-time{margin:12px 0 0;font-size:19px;font-style:italic;color:#7d4b53}
 .royal-venue{margin:5px 0 0;font-size:22px;color:#68454a}
 .royal-address{margin:1px 0 0;font:400 9px/1.5 Outfit,"Segoe UI",Arial,sans-serif;letter-spacing:.08em;color:#806c5a}
-.sheet.in .royal-cloth{animation:cloth-unroll 1.55s cubic-bezier(.18,.78,.2,1) .12s both}
-.sheet.in .royal-cloth .royal-copy{animation:cloth-copy .75s ease 1.05s both}
-@keyframes cloth-unroll{0%{clip-path:inset(0 0 94% 0 round 3px);filter:brightness(1.08)}65%{clip-path:inset(0 0 0 0 round 3px);filter:brightness(1.02)}100%{clip-path:inset(0 0 0 0 round 3px);filter:none}}
-@keyframes cloth-copy{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.royal-copy{position:relative;z-index:1;opacity:0;transform:translateY(-8px)}
+.sheet.in .royal-cloth{animation:cloth-unroll 2.15s cubic-bezier(.22,.78,.18,1) .2s both}
+.sheet.in .royal-rod.bottom{animation:rod-pull 2.15s cubic-bezier(.22,.78,.18,1) .2s both}
+.sheet.in .royal-cloth .royal-copy{animation:cloth-copy .8s ease 1.65s both}
+@keyframes cloth-unroll{0%{clip-path:inset(0 0 98% 0 round 2px)}100%{clip-path:inset(0 0 0 0 round 2px)}}
+@keyframes rod-pull{0%{transform:translateY(-294px)}100%{transform:translateY(0)}}
+@keyframes cloth-copy{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 .sub{margin:12px 0 0;font-style:italic;font-size:22px;color:var(--rose)}
 .place{margin:8px 0 0;font-size:20px;line-height:1.45}
 .place b{font-weight:500}
@@ -425,7 +424,8 @@ img{max-width:100%;display:block}
   #story{scroll-behavior:auto}
   .rib,.flap,.letter,.bow,.seal,#intro,.rise,.music i{transition:none !important;animation:none !important}
   .sheet .rise{opacity:1;transform:none}
-  .sheet.in .royal-cloth{clip-path:inset(0 0 0 0 round 3px)}
+  .sheet.in .royal-cloth{clip-path:inset(0 0 0 0 round 2px)}
+  .royal-rod.bottom{transform:translateY(0)}
   .royal-copy{opacity:1;transform:none}
 }
 </style>
