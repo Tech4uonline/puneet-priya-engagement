@@ -315,9 +315,8 @@ img{max-width:100%;display:block}
   border:1px solid rgba(184,146,74,.72);
   box-shadow:0 5px 16px rgba(92,52,62,.10),0 0 0 4px rgba(255,253,249,.88),0 0 0 5px rgba(184,146,74,.25);
 }
-.portrait img{width:100%;height:100%;object-fit:cover}
-.portrait .groom{object-position:50% 46%}
-.portrait .bride{object-fit:contain;object-position:center;background:linear-gradient(180deg,#fbf1e9,#f4e2d9)}
+.portrait img{width:100%;height:100%;object-fit:contain;object-position:center;background:linear-gradient(180deg,#fbf1e9,#f4e2d9)}
+.portrait .groom,.portrait .bride{object-fit:contain;object-position:center}
 .person h3{margin:12px 0 0;font-size:23px;font-weight:500;line-height:1.12;color:#563744}
 .role,.fine,.btn{
   font-family:Outfit,"Segoe UI",Arial,sans-serif;
@@ -397,13 +396,9 @@ img{max-width:100%;display:block}
     aspect-ratio:1/1;
     height:auto;
   }
-  .portrait img{width:100%;height:100%;object-fit:cover}
-  .portrait .groom{object-position:50% 50%}
-  .portrait .bride{
-    object-fit:contain;
-    object-position:center;
-    filter:brightness(1.04) contrast(1.03) saturate(1.02);
-  }
+  .portrait img{width:100%;height:100%;object-fit:contain;object-position:center}
+  .portrait .groom,.portrait .bride{object-fit:contain;object-position:center}
+  .portrait .bride{filter:brightness(1.04) contrast(1.03) saturate(1.02)}
   .person h3{font-size:22px}
 }
 @media (max-width:380px){
@@ -555,7 +550,7 @@ img{max-width:100%;display:block}
       <div class="rule rise d2" aria-hidden="true"><i></i></div>
       <div class="pair rise d3">
         <article class="person">
-          <div class="portrait"><img class="groom" src="assets/puneet.jpg" alt="Puneet Singh Tomar" width="800" height="1000" loading="lazy"></div>
+          <div class="portrait"><img class="groom" src="assets/Elegant%20Groom-to-Be%20Wedding%20Portrait%20Card.png" alt="Puneet Singh Tomar — groom-to-be" width="800" height="1000" loading="lazy"></div>
           <h3>Puneet</h3>
           <p class="role">Groom-to-be</p>
         </article>
